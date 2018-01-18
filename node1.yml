@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: qroot-node1
+spec:
+  hostNetwork: true
+  containers:
+  - image: alpine
+    name: util-container
+    command: ["sleep"]
+    args: ["600000"]
+    volumeMounts:
+    - mountPath: /host
+      name: mast-volume
+  nodeSelector:
+    nodeName: node1
+  volumes:
+  - name: mast-volume
+    hostPath:
+      # directory location on host
+      path: /
